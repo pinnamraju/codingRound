@@ -1,0 +1,10 @@
+Changes and Updates:
+
+1. PlatformUtils -is dependent on JavaFX which does not work for Open JDK. Hence refactored to use Platform Class from com.sun.jna.Platform
+2. Moved all source Classes to sanity package instead of default package.
+3. Added testng.xml file with classes scope under a new directory resources.
+4. Modified pom.xml to include Maven surefire plugin to call testng.xml
+5. Added Maven compiler plugin with a target 1.8 for JDK compatibility
+6. Updated FlightBookingTest Class as a starting point by moving driver initialization to BeforeClass testng annotation.
+7. Driver instantitaion should always happen only after setting Platform environment variable. Hence moved setDriverPath call into BeforClass related init call.
+8. Tested and found now that chrome browser is launched successfully but need to correct other parts of test.

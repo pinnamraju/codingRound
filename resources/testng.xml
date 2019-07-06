@@ -2,7 +2,9 @@
 <suite name="codingRound">
 	<test name="testngTest">
 		<classes>
-			<class name="codingRound.sanity.FlightBookingTest" />
+			<class name="codingRound.sanity.FlightBookingTest" />  
+			<class name="codingRound.sanity.HotelBookingTest" />
+			<class name="codingRound.sanity.SignInTest" />
 		</classes>
 	</test>
 </suite>

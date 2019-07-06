@@ -1,59 +1,52 @@
 package codingRound.sanity;
-import com.sun.jna.Platform;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-
 import java.util.List;
 
-public class FlightBookingTest {
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-	WebDriver driver;
+public class FlightBookingTest extends DriverHandler {
 	
-    @BeforeTest
-    public void initDriver() throws Exception {
-    	setDriverPath();
-    	driver = new ChromeDriver();
-    }
-
+	FlightBookingTest() {
+		super();
+		//For 120 seconds if element is not visible, timeout exception will appear
+    	AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(driver, 120);
+    	PageFactory.initElements(factory, this);
+    }   
+    
     @Test
-    public void testThatResultsAppearForAOneWayJourney() {
-    	System.out.println("");        
+    public void testThatResultsAppearForAOneWayJourney() {       
         driver.get("https://www.cleartrip.com/");
-        waitFor(2000);
+        isloadComplete(driver, 1500);
         driver.findElement(By.id("OneWay")).click();
 
         driver.findElement(By.id("FromTag")).clear();
         driver.findElement(By.id("FromTag")).sendKeys("Bangalore");
 
         //wait for the auto complete options to appear for the origin
-
-        waitFor(2000);
+        isloadComplete(driver, 2500);
         List<WebElement> originOptions = driver.findElement(By.id("ui-id-1")).findElements(By.tagName("li"));
         originOptions.get(0).click();
-
-        driver.findElement(By.id("toTag")).clear();
-        driver.findElement(By.id("toTag")).sendKeys("Delhi");
+        isloadComplete(driver, 1500);
+        driver.findElement(By.id("ToTag")).clear();
+        driver.findElement(By.id("ToTag")).sendKeys("Delhi");
 
         //wait for the auto complete options to appear for the destination
-
-        waitFor(2000);
+        isloadComplete(driver, 2500);
         //select the first item from the destination auto complete list
         List<WebElement> destinationOptions = driver.findElement(By.id("ui-id-2")).findElements(By.tagName("li"));
         destinationOptions.get(0).click();
-
+        isloadComplete(driver, 1500);
         driver.findElement(By.xpath("//*[@id='ui-datepicker-div']/div[1]/table/tbody/tr[3]/td[7]/a")).click();
 
         //all fields filled in. Now click on search
         driver.findElement(By.id("SearchBtn")).click();
 
-        waitFor(5000);
+        isloadComplete(driver, 1000);
         //verify that result appears for the provided journey search
         Assert.assertTrue(isElementPresent(By.className("searchSummary")));
 
@@ -61,16 +54,6 @@ public class FlightBookingTest {
         driver.quit();
 
     }
-
-
-    private void waitFor(int durationInMilliSeconds) {
-        try {
-            Thread.sleep(durationInMilliSeconds);
-        } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-    }
-
 
     private boolean isElementPresent(By by) {
         try {
@@ -81,15 +64,5 @@ public class FlightBookingTest {
         }
     }
 
-    private void setDriverPath() {
-        if (Platform.isMac()) {
-            System.setProperty("webdriver.chrome.driver", "chromedriver");
-        }
-        if (Platform.isWindows()) {
-            System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-        }
-        if (Platform.isLinux()) {
-            System.setProperty("webdriver.chrome.driver", "chromedriver_linux");
-        }
-    }
+    
 }

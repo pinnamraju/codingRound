@@ -1,10 +1,26 @@
 Changes and Updates:
-
+July 5 2019
 1. PlatformUtils -is dependent on JavaFX which does not work for Open JDK. Hence refactored to use Platform Class from com.sun.jna.Platform
 2. Moved all source Classes to sanity package instead of default package.
 3. Added testng.xml file with classes scope under a new directory resources.
 4. Modified pom.xml to include Maven surefire plugin to call testng.xml
 5. Added Maven compiler plugin with a target 1.8 for JDK compatibility
 6. Updated FlightBookingTest Class as a starting point by moving driver initialization to BeforeClass testng annotation.
-7. Driver instantitaion should always happen only after setting Platform environment variable. Hence moved setDriverPath call into BeforClass related init call.
+7. Driver instantiation should always happen only after setting Platform environment variable. Hence moved setDriverPath call into BeforClass related initDriver call.
 8. Tested and found now that chrome browser is launched successfully but need to correct other parts of test.
+July 6 2019
+1.1. Updated Chromedriver.exe with latest driver from Seleniumhq based on Chrome version on my machine.
+1.2. Updated initDriver method to handle alert notifications through Chrome Options
+2. Added a method called isloadComplete which checks for DOM ready state to handle AJAX calls and delays required with a loop to retry and wait for a maximum of 120*delay.
+3. Updated all waitFor methods to now call isloadComplete to handle all delay handling requirements.
+4. Updated locator for Destination city in FlightBooking test to ToTag instead of totag.
+5. Updated delay values ideally to ensure tests run successfully.
+6. Made changes to have a constructor instead of BeforeClass and moved initDriver call to be invoked from constructor.
+7. Add call to invoke PageFactoryInitElements in the constructor for all classes/tests -so that locators could be defined using FindBy annotations.
+8. Add call to AjaxElementLocatorFactory to handle all element find timeout issues with 120 seconds max delay in all classes Constructor
+9. Add Chrome options to handle notification alert not to be displayed and accept it by default -can be altered to Block alerts on need basis
+10. Updated locators for HotelBooking Class and SignIn Test class 
+11. Added assertions for HotelBooking class and Sign in Test class to establish success/failure criteria of tests
+12. Refactored by adding a new super Class DriverHandler with protected driver variable to be used across all tests.
+13. Updated all classes to remove clutter and have all reusable methods like driver initialization, wait/delay handlers, etc under it.
+14. Tested all tests and they are running successfully with no errors and validating all criteria defined. 

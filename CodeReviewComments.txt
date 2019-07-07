@@ -24,3 +24,31 @@ July 6 2019
 12. Refactored by adding a new super Class DriverHandler with protected driver variable to be used across all tests.
 13. Updated all classes to remove clutter and have all reusable methods like driver initialization, wait/delay handlers, etc under it.
 14. Tested all tests and they are running successfully with no errors and validating all criteria defined. 
+July 7 2019
+1. Created Singleton Logger and implemented multi-threaded logger for all classes.
+2. Updated all Tests to use FindBy annotations consistently across tests to avoid hard-coded locators in test methods.
+3. Added log statements across all tests to reflect entry and exit criteria of tests.
+4. Made driver instance as a protected variable and updated all classes so that the tests can run in parallel.
+5. Updated testng.xml to run parallel tests successfully.
+6. Updated Logger with a rotation log file that can hold a maximum of 1MB size and max files of 10.
+7. Updated Logger to redirect all Sys.out and Sys.err output to log file.
+8. Updated all Classes to have Constructor, testMethod and Locators -in the exact order for ease.
+
+***Major Note: Adding a lot of assertions, extending tests to support boundary values, equivalence classes and addressing test data to cover minimal combinations (orthogonal coverage) is the key 
+behind any test cases and assess quality. However, I have not addressed them here because that becomes a major project to be dealt with framework to be extended significantly in a lot of aspects.
+This also includes handling unexpected alerts, unexpected events, re-test failures alone and a lot of other such extensions.
+
+How to run the tests?
+1. Use pom.xml and Maven ->Test target which picks up testng.xml and runs tests in parallel browsers.
+2. If tests fail, please update your driver executable based on browser version and OS.
+--Completed all tests with parallel browser execution and log file validation to confirm working of tests.
+
+Important notes, Roadmap and next steps:
+1. Parallel Browser implementation supported only for Local machine tests...To support Selenium Grid, cloud(docker) and other advanced setups, framework has to be extended
+2. We could extend this framework for supporting multiple types of browsers (only Chrome now)
+3. If your tests fail, please update the driver executable based on your local Browser version.
+4. logs folder has Log file. This logging can be further extended with a nice Html report ith graphs, charts, etc.
+5. There are no Dependent tests in the current exercise. However, if output of one test depends on other test, we need to extend framework with significant changes needed.
+6. When tests increase, might be a good idea to have all locators in flat files (csv, xls, DB, etc) for ease of maintenance.
+7. To handle data driven requirements, like testing for multiple logins (valid/invalid), framework has to be extended probably with a nice DB for locators and data.
+8. Health checks and custom defined error levels based on environment availability, multiple test suites support are nice features to extend in framework

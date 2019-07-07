@@ -1,0 +1,18 @@
+Jul 07, 2019 5:25:17 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: W3C
+Jul 07, 2019 5:25:19 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: W3C
+Jul 07, 2019 5:25:22 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: W3C
+Jul 07, 2019 5:25:22 PM codingRound.sanity.SignInTest shouldThrowAnErrorIfSignInDetailsAreMissing
+INFO: SignInTest initiated
+Jul 07, 2019 5:25:22 PM codingRound.sanity.FlightBookingTest testThatResultsAppearForAOneWayJourney
+INFO: FlighBookingTest initiated
+Jul 07, 2019 5:25:22 PM codingRound.sanity.HotelBookingTest shouldBeAbleToSearchForHotels
+INFO: HotelBookingTest initiated
+Jul 07, 2019 5:25:55 PM codingRound.sanity.SignInTest shouldThrowAnErrorIfSignInDetailsAreMissing
+INFO: Sign In Checks validated.....Result: Pass
+Jul 07, 2019 5:25:57 PM codingRound.sanity.FlightBookingTest testThatResultsAppearForAOneWayJourney
+INFO: Flight results appear.....Result: Pass
+Jul 07, 2019 5:26:29 PM codingRound.sanity.HotelBookingTest shouldBeAbleToSearchForHotels
+INFO: Holtel Search results obtained..Result: Pass

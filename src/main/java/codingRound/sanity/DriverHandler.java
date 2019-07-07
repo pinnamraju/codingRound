@@ -2,11 +2,14 @@ package codingRound.sanity;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
 import com.sun.jna.Platform;
 
 public abstract class DriverHandler {
@@ -22,6 +25,7 @@ public abstract class DriverHandler {
 	}
 
 	public DriverHandler() {
+		LogHandle.getInstance().logger = Logger.getLogger(DriverHandler.class.getName());
 		setDriverPath();
     	//Create a map to store  preferences 
     	Map<String, Object> prefs = new HashMap<String, Object>();
@@ -74,7 +78,7 @@ public abstract class DriverHandler {
         try {
             Thread.sleep(durationInMilliSeconds);
         } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+			LogHandle.logger.log(Level.SEVERE, e.getMessage());
         }
     }
 }
